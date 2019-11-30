@@ -2,6 +2,6 @@ module.exports = {
   semi: false,
   singleQuote: true,
   jsxSingleQuote: true,
-  trailingComma: "none",
-  parser: "babel"
+  trailingComma: 'none',
+  parser: 'babel'
 }
