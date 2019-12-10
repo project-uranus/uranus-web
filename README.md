@@ -8,14 +8,45 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Run
 
 ```shell
-$ yarn install
-$ yarn start
+yarn install
+yarn start
 ```
 
 ## Build
 
 ```shell
-$ yarn build
+yarn build
+```
+
+## Configuration
+
+In `.vscode/settings.json`:
+
+```json
+// eslint
+"eslint.enable": true,
+"eslint.autoFixOnSave": true,
+"eslint.validate": [
+  "javascript",
+  "javascriptreact",
+  {
+    "language": "typescript",
+    "autoFix": true
+  },
+  {
+    "language": "typescriptreact",
+    "autoFix": true
+  }
+],
+
+// prettier
+"editor.formatOnSave": true,
+"prettier.configPath": ".prettierrc.js",
+"prettier.singleQuote": true,
+"prettier.trailingComma": "none",
+"prettier.semi": false,
+"prettier.useTabs": false,
+"prettier.tabWidth": 2,
 ```
 
 ## License
