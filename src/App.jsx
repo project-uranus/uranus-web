@@ -1,17 +1,19 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Layout } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
+import zhCN from 'antd/es/locale/zh_CN'
+import moment from 'moment'
 
-import Sider from 'components/Sider'
-import Footer from 'components/Footer'
-import Home from 'components/Home'
+import Login from 'pages/Login'
+import Manage from 'pages/Manage'
+import Ground from 'pages/Ground'
 
-const { Header, Content } = Layout
+moment.locale('zh-cn')
 
 const styles = StyleSheet.create({
   layout: {
-    height: '100vh'
+    minHeight: '100vh'
   },
   content: {
     backgroundColor: 'white',
@@ -22,20 +24,17 @@ const styles = StyleSheet.create({
 
 const App = () => {
   return (
-    <Layout className={css(styles.layout)}>
-      <Router>
-        <Sider />
-        <Layout>
-          <Header></Header>
-          <Content className={css(styles.content)}>
-            <Switch>
-              <Route path={'/'} exact component={Home} />
-            </Switch>
-          </Content>
-          <Footer />
-        </Layout>
-      </Router>
-    </Layout>
+    <ConfigProvider locale={zhCN}>
+      <Layout className={css(styles.layout)}>
+        <Router>
+          <Switch>
+            <Route path={'/manage'} component={Manage} />
+            <Route path={'/ground'} component={Ground} />
+            <Route path={'/'} exact component={Login} />
+          </Switch>
+        </Router>
+      </Layout>
+    </ConfigProvider>
   )
 }
 

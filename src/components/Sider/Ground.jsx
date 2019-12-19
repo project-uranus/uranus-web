@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Layout, Menu, Icon } from 'antd'
 
@@ -38,10 +37,5 @@ const UranusSider = props => (
     </Menu>
   </Sider>
 )
-
-UranusSider.propTypes = {
-  isCollapsed: PropTypes.bool,
-  onCollapse: PropTypes.func
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UranusSider)
