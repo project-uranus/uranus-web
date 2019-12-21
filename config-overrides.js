@@ -27,6 +27,8 @@ module.exports = override(
   addLessLoader({
     javascriptEnabled: true,
     modifyVars: {
+      '@border-radius-base': '10px',
+      '@card-radius': '@border-radius-base',
       '@primary-color': '#2D5F96'
     }
   })
