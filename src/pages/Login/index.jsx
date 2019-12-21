@@ -3,11 +3,11 @@ import {
   Row, Col, Card, Layout
 } from 'antd'
 import { connect } from 'react-redux'
-import WrappedLoginForm from '../../components/Login/LoginForm'
-import WrappedRegisterForm from '../../components/Login/RegisterForm'
+import WrappedLoginForm from 'components/Login/LoginForm'
+import WrappedRegisterForm from 'components/Login/RegisterForm'
 import { tabCard } from 'redux/actions'
 import { StyleSheet, css } from 'aphrodite'
-import Footer from '../../components/Footer'
+import Footer from 'components/Footer'
 
 const { Header, Content } = Layout
 
@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 16,
     padding: 16
+  },
+  card: {
+    borderRadius: '10px',
+    background: '#fff'
   }
 })
 
@@ -56,7 +60,7 @@ const Login = props => {
           <Col span={8}>
             <Card
               hoverable
-              style={{ borderRadius: '10px', background: '#fff' }}
+              className={css(styles.card)}
               tabList={tabList}
               onTabChange={props.changeTab}
             >

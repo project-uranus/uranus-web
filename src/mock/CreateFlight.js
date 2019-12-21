@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 Mock.mock(
-  '/api/flight',
+  'https://private-anon-9674dcfccd-uranus.apiary-mock.com/api/flight',
   'post',
   (option) => {
     console.log(option)

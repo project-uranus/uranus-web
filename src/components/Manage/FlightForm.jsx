@@ -8,10 +8,9 @@ import {
   message,
   InputNumber
 } from 'antd'
-// import Cascader from './Cascader'
 import AirportSelect from './Select'
 import Passenger from './PassengerUpload'
-import { createFlight } from '../../services/flight'
+import { createFlight } from 'services/flight'
 
 const { Option } = Select
 
@@ -94,7 +93,6 @@ const Flight = (props) => {
             }
           ]
         })(
-        // <Cascader placeholder='请选择起飞机场'/>
           <AirportSelect/>
         )}
       </Form.Item>
@@ -107,7 +105,6 @@ const Flight = (props) => {
             }
           ]
         })(
-        // <Cascader placeholder='请选择到达机场'/>
           <AirportSelect/>
         )}
       </Form.Item>

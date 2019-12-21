@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, Icon, Input, Button } from 'antd'
 import { auth } from '../../services/user'
-import { setToken, getRole } from '../../services/token'
-import history from '../../history'
+import { setToken, getRole } from 'services/token'
+import history from 'history.js'
 
 const LoginForm = props => {
   const { form } = props
@@ -15,7 +15,10 @@ const LoginForm = props => {
     const { token } = data
     setToken(token)
     const role = getRole(token)
-    const paths = ['manage/create', 'ground/home']
+    const paths = {
+      administrator: 'manage/create',
+      staff: 'ground/home'
+    }
     history.push(paths[role])
   }
 

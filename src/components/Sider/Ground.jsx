@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Layout, Menu, Icon } from 'antd'
-
+import { NavLink } from 'react-router-dom'
 import { toggleSider } from 'redux/actions'
 
 import Logo from './Logo'
@@ -31,8 +31,10 @@ const UranusSider = props => (
     <Logo collapsed={props.isCollapsed} />
     <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
       <Menu.Item key='1'>
-        <Icon type='home' />
-        <span>首页</span>
+        <NavLink to='/ground/checkin'>
+          <Icon type='edit' />
+          <span>管理乘客值机</span>
+        </NavLink>
       </Menu.Item>
     </Menu>
   </Sider>

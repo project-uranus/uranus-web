@@ -1,12 +1,9 @@
 import { api, dataHandler } from '../utils/http'
-// import '../mock/Login'
+// import 'mock/Login'
 
-const url = '/api/user'
-const authUrl = '/api/auth'
+const register = (data) => api.post('/auth/sign_up', data).then(dataHandler)
 
-const register = (data) => api.post(url, data).then(dataHandler)
-
-const auth = (data) => api.post(authUrl, data).then(dataHandler)
+const auth = (data) => api.post('/auth/login', data).then(dataHandler)
 
 export {
   register,

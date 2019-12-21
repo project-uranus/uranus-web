@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Select, message } from 'antd'
-import { register } from '../../services/user'
+import { register } from 'services/user'
 const { Option } = Select
 
 const RegisterForm = props => {

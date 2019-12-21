@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 Mock.mock(
-  '/api/flightAll',
+  'https://private-anon-9674dcfccd-uranus.apiary-mock.com/api/flightAll',
   'get',
   () => {
     return {

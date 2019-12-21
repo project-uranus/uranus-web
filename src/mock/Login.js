@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
 
 Mock.mock(
-  '/api/auth',
+  'https://private-anon-9674dcfccd-uranus.apiary-mock.com/auth/login',
   'post',
   (option) => {
     const { userId, password } = JSON.parse(option)

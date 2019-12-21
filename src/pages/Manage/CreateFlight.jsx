@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'antd'
-import Flight from '../../components/Manage/FlightForm'
+import Flight from 'components/Manage/FlightForm'
 import { StyleSheet, css } from 'aphrodite'
 
 const styles = StyleSheet.create({

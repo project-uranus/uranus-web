@@ -19,6 +19,15 @@ const defaultState = {
   },
   airportList: {
     dataSource: []
+  },
+  step: {
+    current: 0
+  },
+  passengerId: {
+    id: ''
+  },
+  passengerInfo: {
+    info: {}
   }
 }
 
@@ -71,6 +80,30 @@ export default (state = defaultState, action) => {
         passengerList: {
           ...state.passengerList,
           dataSource: action.payload.dataSource
+        }
+      }
+    case actionTypes.STEP:
+      return {
+        ...state,
+        step: {
+          ...state.step,
+          current: action.payload.current
+        }
+      }
+    case actionTypes.ID:
+      return {
+        ...state,
+        passengerId: {
+          ...state.passengerId,
+          id: action.payload.id
+        }
+      }
+    case actionTypes.INFO:
+      return {
+        ...state,
+        passengerInfo: {
+          ...state.passengerInfo,
+          info: action.payload.info
         }
       }
     default:

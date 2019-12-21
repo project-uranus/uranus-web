@@ -1,7 +1,7 @@
 import { message } from 'antd'
 import axios from 'axios'
-import { getToken } from '../services/token'
-import history from '../history'
+import { getToken } from 'services/token'
+import history from 'history.js'
 
 const HTTPErrorHandler = (error) => {
   if (error.response) {
@@ -37,7 +37,7 @@ const dataHandler = (response) => {
   return data.value
 }
 
-const baseURL = ''
+const baseURL = 'https://private-anon-9674dcfccd-uranus.apiary-mock.com'
 
 const api = axios.create({
   baseURL

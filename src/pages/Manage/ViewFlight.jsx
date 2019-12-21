@@ -1,6 +1,6 @@
 import React from 'react'
-import Modal from '../../components/Manage/FlightModal'
-import Table from '../../components/Manage/FlightTable'
+import Modal from 'components/Manage/FlightModal'
+import Table from 'components/Manage/FlightTable'
 
 const Home = () => (
   <React.Fragment>

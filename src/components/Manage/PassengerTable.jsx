@@ -4,8 +4,8 @@ import { Table, Card } from 'antd'
 import { modal, passengerList } from 'redux/actions'
 import { connect } from 'react-redux'
 import { StyleSheet, css } from 'aphrodite'
-import { getPassenger } from '../../services/passenger'
-import { getPassengerFlight } from '../../services/flight'
+import { getPassenger } from 'services/passenger'
+import { getPassengerFlight } from 'services/flight'
 
 const styles = StyleSheet.create({
   card: {

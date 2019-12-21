@@ -42,11 +42,35 @@ const airportList = content => ({
   }
 })
 
+const step = content => ({
+  type: actionTypes.STEP,
+  payload: {
+    current: content.current
+  }
+})
+
+const passengerId = content => ({
+  type: actionTypes.ID,
+  payload: {
+    id: content.id
+  }
+})
+
+const passengerInfo = content => ({
+  type: actionTypes.INFO,
+  payload: {
+    info: content.info
+  }
+})
+
 export {
   toggleSider,
   tabCard,
   modal,
   flightList,
   passengerList,
-  airportList
+  airportList,
+  step,
+  passengerId,
+  passengerInfo
 }
