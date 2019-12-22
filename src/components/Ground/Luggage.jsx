@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, InputNumber, Button } from 'antd'
 import { connect } from 'react-redux'
-import { step } from 'redux/actions'
+import { step, luggage } from 'redux/actions'
 import { sendLuggage } from 'services/passenger'
 
 const mapStateToProps = state => ({
@@ -9,29 +9,32 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  nextStep: () => {
+  nextStep: (weight) => {
     dispatch(
       step({ current: 2 })
+    )
+    dispatch(
+      luggage({ weight })
     )
   }
 })
 
 const Luggage = (props) => {
   console.log(props)
-  const { getFieldDecorator, getFieldsValue, validateFields } = props.form
+  const { getFieldDecorator, getFieldValue, validateFields } = props.form
   return (
     <Form
       onSubmit={async (e) => {
         e.preventDefault()
         await validateFields()
-        await getFieldsValue()
-        console.log(props.id)
+        const weight = getFieldValue('weight')
+        console.log(typeof weight)
         const data = {
-          ...getFieldsValue(),
-          id_number: props.id
+          weight: weight,
+          passenger_id: props.id
         }
         await sendLuggage(data)
-        props.nextStep()
+        props.nextStep(weight)
       }}
     >
       <Form.Item label='行李重量'>
@@ -44,6 +47,7 @@ const Luggage = (props) => {
           ]
         })(<InputNumber
           min={0}
+          step={0.1}
           formatter={value => `${value}kg`}
           parser={value => value.replace('kg', '')}/>)}
       </Form.Item>

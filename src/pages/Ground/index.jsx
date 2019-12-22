@@ -5,11 +5,11 @@ import {
 import { Route, Switch } from 'react-router-dom'
 import { StyleSheet, css } from 'aphrodite'
 import Fooder from 'components/Footer'
-import Sider from 'components/Sider/Ground'
 import Home from './PassengerList'
 import Detail from './PassengerCheckin'
+import Header from 'components/Header/Ground'
 
-const { Header, Content } = Layout
+const { Content } = Layout
 
 const styles = StyleSheet.create({
   content: {
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
 const ground = props => {
   return (
     <Layout>
-      <Sider />
       <Layout>
         <Header></Header>
         <Content className={css(styles.content)}>

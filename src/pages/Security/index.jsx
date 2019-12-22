@@ -5,11 +5,8 @@ import {
 import { Route, Switch } from 'react-router-dom'
 import { StyleSheet, css } from 'aphrodite'
 import Fooder from 'components/Footer'
-import Sider from 'components/Sider/Manager'
-import CreateFlight from './CreateFlight'
-import ViewFlight from './ViewFlight'
-import Passenger from './Passenger'
-import Header from 'components/Header/Manage'
+import Home from './SecurityList'
+import Header from 'components/Header/Security'
 
 const { Content } = Layout
 
@@ -21,17 +18,14 @@ const styles = StyleSheet.create({
   }
 })
 
-const manage = props => {
+const ground = props => {
   return (
     <Layout>
-      <Sider />
       <Layout>
         <Header></Header>
         <Content className={css(styles.content)}>
           <Switch>
-            <Route path={'/manage/create'} exact component={CreateFlight} />
-            <Route path={'/manage/view'} exact component={ViewFlight} />
-            <Route path={'/manage/passenger'} exact component={Passenger} />
+            <Route path={'/security/luggage'} exact component={Home} />
           </Switch>
         </Content>
         <Fooder />
@@ -40,4 +34,4 @@ const manage = props => {
   )
 }
 
-export default manage
+export default ground

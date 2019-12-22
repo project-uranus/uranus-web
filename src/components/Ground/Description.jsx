@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Descriptions, Button } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
-import { step, passengerInfo } from 'redux/actions'
-import { getPassengerInfo } from 'services/passenger'
+import { step } from 'redux/actions'
 
 const styles = StyleSheet.create({
   card: {
@@ -21,21 +20,33 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       step({ current: 1 })
     )
-  },
-  setPassengerInfo: (data) => {
-    dispatch(
-      passengerInfo({ info: data })
-    )
   }
 })
+// "type": "luggage",
+//     "message": [{
+//         "information": {
+//             "email": "john.doe@example.com",
+//             "name": "John Doe",
+//             "first_name": "John",
+//             "last_name": "Doe",
+//             "id_number": "00000000"
+//         },
+//         "spec": {
+//             "compartment_code": "F",
+//             "seat_number": "31A"
+//         }
+//     }]
 
 const PassengerInfo = (props) => {
   console.log(props)
   const map = {
     id_number: '身份证号',
+    name: '姓名',
     first_name: '名',
     last_name: '姓',
-    email: '邮箱'
+    email: '邮箱',
+    compartment_code: '舱位',
+    seat_number: '座位号'
   }
   const { info } = props
   const dataDescription = Object.keys(info).map(
@@ -44,13 +55,6 @@ const PassengerInfo = (props) => {
         {info[key]}
       </Descriptions.Item>)
   )
-
-  useEffect(() => {
-    getPassengerInfo(props.id).then((data) => {
-      console.log(data)
-      props.setPassengerInfo(data)
-    })
-  }, [])
 
   return (
     <div className={css(styles.card)}>

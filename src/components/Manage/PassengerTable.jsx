@@ -4,8 +4,8 @@ import { Table, Card } from 'antd'
 import { modal, passengerList } from 'redux/actions'
 import { connect } from 'react-redux'
 import { StyleSheet, css } from 'aphrodite'
-import { getPassenger } from 'services/passenger'
-import { getPassengerFlight } from 'services/flight'
+import { getPassengers } from 'services/passenger'
+import { getFlights } from 'services/flight'
 
 const styles = StyleSheet.create({
   card: {
@@ -18,8 +18,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onClick: (name) => {
-    getPassengerFlight(name).then((data) => {
+  onClick: (id) => {
+    getFlights(id).then((data) => {
+      data.map((item) => {
+        item.origin_airport = item.origin_airport.position
+        item.destination_airport = item.destination_airport.position
+      })
       dispatch(
         modal({
           visible: true,
@@ -38,7 +42,7 @@ const mapDispatchToProps = dispatch => ({
 const PassengerTable = (props) => {
   const columns = [
     {
-      title: '昵称',
+      title: '姓名',
       dataIndex: 'name',
       key: 'name',
       fixed: 'left',
@@ -49,7 +53,7 @@ const PassengerTable = (props) => {
       dataIndex: 'id_number',
       key: 'id_number',
       fixed: 'left',
-      width: 100
+      width: 200
     },
     {
       title: '邮箱',
@@ -71,19 +75,19 @@ const PassengerTable = (props) => {
       width: 200,
       render: (record) => (
         <a
-          onClick={() => props.onClick(record.name)}
+          onClick={() => props.onClick(record.id)}
         >查看历史航班信息</a>
       )
     }
   ]
   useEffect(() => {
-    getPassenger().then((data) => {
+    getPassengers().then((data) => {
       props.setPassengerList(data)
     })
   }, [])
   return (
     <Card hoverable className={css(styles.card)}>
-      <Table columns={columns} dataSource={props.dataSource} rowKey='id_number' scroll={{ x: 1300 }}/>
+      <Table columns={columns} dataSource={props.dataSource} rowKey='id' scroll={{ x: 1300 }}/>
     </Card>
   )
 }

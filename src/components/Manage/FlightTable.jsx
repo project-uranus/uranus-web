@@ -4,8 +4,8 @@ import { Table, Card, Tag } from 'antd'
 import { modal, flightList } from 'redux/actions'
 import { connect } from 'react-redux'
 import { StyleSheet, css } from 'aphrodite'
-import { getFlight } from 'services/flight'
-import { getFlightPassenger } from 'services/passenger'
+import { getFlights } from 'services/flight'
+import { getPassengers } from 'services/passenger'
 import timeFormat from 'utils/time'
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: (flightNum) => {
-    getFlightPassenger(flightNum).then((data) => {
+    getPassengers(flightNum).then((data) => {
       dispatch(
         modal({
           visible: true,
@@ -79,49 +79,55 @@ const FlightTable = (props) => {
       key: 'arrival_time',
       render: timeFormat
     },
-    {
-      title: '登机时间',
-      dataIndex: 'boarding_time',
-      key: 'boarding_time',
-      render: timeFormat
-    },
-    {
-      title: '登机口',
-      dataIndex: 'boarding_gate',
-      key: 'boarding_gate'
-    },
+    // {
+    //   title: '登机时间',
+    //   dataIndex: 'boarding_time',
+    //   key: 'boarding_time',
+    //   render: timeFormat
+    // },
+    // {
+    //   title: '登机口',
+    //   dataIndex: 'boarding_gate',
+    //   key: 'boarding_gate'
+    // },
     {
       title: '航班状态',
       dataIndex: 'status',
       key: 'status',
       render: (tag) => {
-        if (tag === 0) return <Tag color='green'>飞行中</Tag>
-        else return <Tag color='blue'>飞行结束</Tag>
+        if (tag === 'scheduled') return <Tag color='blue'>已排定</Tag>
+        else if (tag === 'delayed') return <Tag color='magenta'>已延误</Tag>
+        else if (tag === 'boarding') return <Tag color='lime'>登机中</Tag>
+        else if (tag === 'departed') return <Tag color='cyan'>已出发</Tag>
+        else if (tag === 'arrived') return <Tag color='green'>已到达</Tag>
+        else if (tag === 'cancelled') return <Tag color='red'>已取消</Tag>
+        else return <Tag color='blue'>无</Tag>
       }
     },
     {
       title: '操作',
       key: 'action',
       fixed: 'right',
+      width: 150,
       render: (record) => (
         <a
-          onClick={() => props.onClick(record.flight_number)}
+          onClick={() => props.onClick(record.id)}
         >查看乘客信息</a>
       )
     }
   ]
   useEffect(() => {
-    getFlight().then((data) => {
+    getFlights().then((data) => {
       data.map((item) => {
-        item.origin_airport = item.origin_airport.name
-        item.destination_airport = item.destination_airport.name
+        item.origin_airport = item.origin_airport.position
+        item.destination_airport = item.destination_airport.position
       })
       props.setFlightList(data)
     })
   }, [])
   return (
     <Card hoverable className={css(styles.card)}>
-      <Table columns={columns} dataSource={props.dataSource} rowKey='flight_number' scroll={{ x: 1300 }}/>
+      <Table columns={columns} dataSource={props.dataSource} rowKey='id' scroll={{ x: 1300 }}/>
     </Card>
   )
 }

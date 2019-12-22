@@ -8,8 +8,9 @@ import WrappedRegisterForm from 'components/Login/RegisterForm'
 import { tabCard } from 'redux/actions'
 import { StyleSheet, css } from 'aphrodite'
 import Footer from 'components/Footer'
+import Header from 'components/Header/Login'
 
-const { Header, Content } = Layout
+const { Content } = Layout
 
 const styles = StyleSheet.create({
   content: {

@@ -3,10 +3,12 @@ import { Upload, Icon } from 'antd'
 
 const { Dragger } = Upload
 
-const User = () => {
+const User = props => {
   const [file, setFile] = useState([])
   return (
     <Dragger
+      accept=".csv"
+      onChange={event => { props.onChange(event) }}
       customRequest={() => {}}
       beforeUpload={(f) => setFile([f])}
       fileList={file}>

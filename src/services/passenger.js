@@ -1,24 +1,18 @@
 import { api, dataHandler } from '../utils/http'
-import 'mock/FlightPassenger'
-import 'mock/PassengerList'
-import 'mock/PassengerInfo'
-import 'mock/Luggage'
-import 'mock/GetLuggage'
+// import 'mock/PassengerList'
+// import 'mock/PassengerInfo'
+// import 'mock/Luggage'
+// import 'mock/GetLuggage'
+// import 'mock/SendSecurity'
 
-const getPassenger = () => api.get('/api/passengerAll').then(dataHandler)
+const getPassengers = (data) => api.get('/passengers', data).then(dataHandler)
 
-const getFlightPassenger = (data) => api.get('/api/passenger', data).then(dataHandler)
+const sendLuggage = (data) => api.post('/luggages', data).then(dataHandler)
 
-const getPassengerInfo = (data) => api.get('api/passenger/info', data).then(dataHandler)
-
-const sendLuggage = (data) => api.post('api/passenger/luggage', data).then(dataHandler)
-
-const getLuggage = (data) => api.get('api/passenger/luggage', data).then(dataHandler)
+const sendSecurity = (data) => api.put('/luggages', data).then(dataHandler)
 
 export {
-  getPassenger,
-  getFlightPassenger,
-  getPassengerInfo,
+  getPassengers,
   sendLuggage,
-  getLuggage
+  sendSecurity
 }

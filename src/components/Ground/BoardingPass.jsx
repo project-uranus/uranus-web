@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Descriptions, Button } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
-import { getLuggage } from 'services/passenger'
+import { checkinList, step } from 'redux/actions'
 import history from 'history.js'
 
 const styles = StyleSheet.create({
@@ -13,15 +13,36 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   id: state.passengerId.id,
-  info: state.passengerInfo.info
+  info: state.passengerInfo.info,
+  dataSource: state.checkinList.dataSource,
+  weight: state.luggage.weight
 })
 
-const BoardingPass = (props) => {
-  const [luggage, setLuggage] = useState([])
-  console.log(props)
-  const map = {
-    weight: '重量'
+const mapDispatchToProps = dispatch => ({
+  onClick: (props) => {
+    const newDataSource = props.dataSource.filter((item) => item.id_number !== props.id)
+    console.log(newDataSource)
+    dispatch(
+      checkinList({
+        dataSource: newDataSource
+      })
+    )
+    dispatch(
+      step({ current: 0 })
+    )
+    history.push('/ground/checkin')
+    history.go()
   }
+})
+const map = {
+  id_number: '身份证号',
+  first_name: '名',
+  last_name: '姓',
+  email: '邮箱',
+  compartment_code: '舱位',
+  seat_number: '座位号'
+}
+const BoardingPass = (props) => {
   const { info } = props
   const infoDescription = Object.keys(info).map(
     (key) => (
@@ -30,19 +51,10 @@ const BoardingPass = (props) => {
       </Descriptions.Item>)
   )
 
-  const luggageDescription = Object.keys(luggage).map(
-    (key) => (
-      <Descriptions.Item label={map[key]} span={3} key={key}>
-        {luggage[key]}
-      </Descriptions.Item>)
-  )
-
-  useEffect(() => {
-    getLuggage(props.id).then((data) => {
-      console.log(data)
-      setLuggage(data)
-    })
-  }, [])
+  const luggageDescription =
+      <Descriptions.Item label={'重量'} span={3} >
+        {props.weight}kg
+      </Descriptions.Item>
 
   return (
 
@@ -55,8 +67,7 @@ const BoardingPass = (props) => {
       </Descriptions>
       <Button type='primary'
         onClick={() => {
-          history.push('/ground/checkin')
-          history.go()
+          props.onClick(props)
         }}>
           确认信息并发放登机牌
       </Button>
@@ -64,4 +75,4 @@ const BoardingPass = (props) => {
   )
 }
 
-export default connect(mapStateToProps, null)(BoardingPass)
+export default connect(mapStateToProps, mapDispatchToProps)(BoardingPass)

@@ -2,12 +2,12 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
-
+import Header from 'components/Header'
 import Sider from 'components/Sider'
 import Footer from 'components/Footer'
 import Login from 'components/Login'
 
-const { Header, Content } = Layout
+const { Content } = Layout
 
 const styles = StyleSheet.create({
   layout: {

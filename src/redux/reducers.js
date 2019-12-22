@@ -28,10 +28,27 @@ const defaultState = {
   },
   passengerInfo: {
     info: {}
+  },
+  message: {
+    visible: false,
+    id: ''
+  },
+  checkinList: {
+    dataSource: []
+  },
+  securityList: {
+    dataSource: []
+  },
+  counter: {
+    id: ''
+  },
+  luggage: {
+    weight: 0.0
   }
 }
 
 export default (state = defaultState, action) => {
+  console.log(action.type)
   switch (action.type) {
     case actionTypes.TOGGLE_SIDER:
       return {
@@ -91,10 +108,10 @@ export default (state = defaultState, action) => {
         }
       }
     case actionTypes.ID:
+      console.log(action.payload.id)
       return {
         ...state,
         passengerId: {
-          ...state.passengerId,
           id: action.payload.id
         }
       }
@@ -106,6 +123,50 @@ export default (state = defaultState, action) => {
           info: action.payload.info
         }
       }
+    case actionTypes.MESSAGE:
+      return {
+        ...state,
+        message: {
+          ...state.message,
+          visible: action.payload.visible,
+          id: action.payload.id
+        }
+      }
+    case actionTypes.CHECKIN_LIST:
+      return {
+        ...state,
+        checkinList: {
+          ...state.checkinList,
+          dataSource: action.payload.dataSource
+        }
+      }
+    case actionTypes.SECURITY_LIST:
+      console.log(action.payload.dataSource)
+      return {
+        ...state,
+        securityList: {
+          ...state.securityList,
+          dataSource: action.payload.dataSource
+        }
+      }
+    case actionTypes.COUNTER:
+      return {
+        ...state,
+        counter: {
+          ...state.counter,
+          id: action.payload.id
+        }
+      }
+    case actionTypes.LUGGAGE:
+      return {
+        ...state,
+        luggage: {
+          ...state.luggage,
+          weight: action.payload.weight
+        }
+      }
+    case actionTypes.LOG_OUT:
+      return defaultState
     default:
       return state
   }

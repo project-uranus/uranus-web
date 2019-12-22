@@ -8,6 +8,7 @@ import moment from 'moment'
 import Login from 'pages/Login'
 import Manage from 'pages/Manage'
 import Ground from 'pages/Ground'
+import Security from 'pages/Security'
 
 moment.locale('zh-cn')
 
@@ -30,6 +31,7 @@ const App = () => {
           <Switch>
             <Route path={'/manage'} component={Manage} />
             <Route path={'/ground'} component={Ground} />
+            <Route path={'/security'} component={Security} />
             <Route path={'/'} exact component={Login} />
           </Switch>
         </Router>
