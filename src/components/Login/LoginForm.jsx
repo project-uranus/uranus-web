@@ -3,30 +3,47 @@ import { Form, Icon, Input, Button } from 'antd'
 import { auth } from '../../services/user'
 import { setToken, getRole } from 'services/token'
 import history from 'history.js'
+import { counter } from 'redux/actions'
+import { connect } from 'react-redux'
+
+const mapDispatchToProps = dispatch => ({
+  setCounter: (id) => {
+    dispatch(
+      counter({ id })
+    )
+  }
+})
 
 const LoginForm = props => {
   const { form } = props
-  const { getFieldDecorator, validateFields, getFieldValue } = form
+  const { getFieldDecorator, validateFields, getFieldsValue } = form
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     await validateFields()
-    const data = await auth(getFieldValue())
+    const data = await auth(getFieldsValue())
+    console.log(data)
     const { token } = data
     setToken(token)
     const role = getRole(token)
+    if (role === 'staff') {
+      const counterId = data.counter_id
+      props.setCounter(counterId)
+    }
     const paths = {
       administrator: 'manage/create',
-      staff: 'ground/home'
+      staff: 'ground/checkin',
+      security: '/security/luggage'
     }
     history.push(paths[role])
+    history.go()
   }
 
   return (
     <Form
       onSubmit={handleSubmit}>
       <Form.Item>
-        {getFieldDecorator('userId', {
+        {getFieldDecorator('id_number', {
           rules: [{ required: true, message: '请输入用户名!' }]
         })(
           <Input
@@ -57,4 +74,4 @@ const LoginForm = props => {
 
 const WrappedLogin = Form.create({})(LoginForm)
 
-export default WrappedLogin
+export default connect(null, mapDispatchToProps)(WrappedLogin)

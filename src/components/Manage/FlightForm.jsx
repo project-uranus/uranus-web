@@ -10,7 +10,7 @@ import {
 } from 'antd'
 import AirportSelect from './Select'
 import Passenger from './PassengerUpload'
-import { createFlight } from 'services/flight'
+import { createFlight, importPassenger } from 'services/flight'
 
 const { Option } = Select
 
@@ -29,18 +29,11 @@ const Flight = (props) => {
       departure_time: getFieldValue('departure_time').format('YYYY-MM-DD HH:mm:ss'),
       arrival_time: getFieldValue('arrival_time').format('YYYY-MM-DD HH:mm:ss'),
       boarding_time: getFieldValue('boarding_time').format('YYYY-MM-DD HH:mm:ss'),
-      boarding_gate: getFieldValue('boarding_gate').toString(),
-      passengerInfo: getFieldValue('passengerInfo')
+      boarding_gate: getFieldValue('boarding_gate').toString()
     }
     await createFlight(flightData)
+    await importPassenger({ file: getFieldValue('passengerInfo').file })
     message.success('航班创建成功')
-  }
-
-  const normFile = e => {
-    if (Array.isArray(e)) {
-      return e
-    }
-    return e && e.fileList
   }
 
   return (
@@ -150,14 +143,15 @@ const Flight = (props) => {
       </Form.Item>
       <Form.Item label="乘客信息">
         {getFieldDecorator('passengerInfo', {
-          rules: [
-            {
-              // required: true,
-              message: '请上传乘客信息表',
-              valuePropName: 'fileList',
-              getValueFromEvent: normFile
-            }
-          ]
+          // rules: [
+          //   {
+          //     required: true,
+          //     // type: 'file',
+          //     message: '请上传乘客信息表',
+          //     valuePropName: 'fileList',
+          //     getValueFromEvent: normFile
+          //   }
+          // ]
         })(<Passenger />)}
       </Form.Item>
       <Form.Item wrapperCol={{ span: 16, offset: 8 }}>

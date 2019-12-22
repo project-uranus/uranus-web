@@ -22,6 +22,14 @@ const modal = content => ({
   }
 })
 
+const message = content => ({
+  type: actionTypes.MESSAGE,
+  payload: {
+    visible: content.visible,
+    id: content.id
+  }
+})
+
 const flightList = content => ({
   type: actionTypes.FLIGHT_LIST,
   payload: {
@@ -37,6 +45,20 @@ const passengerList = content => ({
 
 const airportList = content => ({
   type: actionTypes.AIRPORT_LIST,
+  payload: {
+    dataSource: content.dataSource
+  }
+})
+
+const checkinList = content => ({
+  type: actionTypes.CHECKIN_LIST,
+  payload: {
+    dataSource: content.dataSource
+  }
+})
+
+const securityList = content => ({
+  type: actionTypes.SECURITY_LIST,
   payload: {
     dataSource: content.dataSource
   }
@@ -63,6 +85,25 @@ const passengerInfo = content => ({
   }
 })
 
+const counter = content => ({
+  type: actionTypes.COUNTER,
+  payload: {
+    id: content.id
+  }
+})
+
+const logOut = content => ({
+  type: actionTypes.LOG_OUT,
+  payload: {}
+})
+
+const luggage = content => ({
+  type: actionTypes.LUGGAGE,
+  payload: {
+    weight: content.weight
+  }
+})
+
 export {
   toggleSider,
   tabCard,
@@ -72,5 +113,11 @@ export {
   airportList,
   step,
   passengerId,
-  passengerInfo
+  passengerInfo,
+  message,
+  checkinList,
+  securityList,
+  counter,
+  logOut,
+  luggage
 }

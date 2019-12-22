@@ -37,7 +37,7 @@ const dataHandler = (response) => {
   return data.value
 }
 
-const baseURL = 'https://private-anon-9674dcfccd-uranus.apiary-mock.com'
+const baseURL = 'http://202.120.40.8:30379'
 
 const api = axios.create({
   baseURL
@@ -48,7 +48,7 @@ api.interceptors.request.use(
     ...config,
     headers: {
       ...config.headers,
-      Authorization: getToken()
+      Authorization: `Bearer ${getToken()}`
     }
   } : config),
   (error) => Promise.reject(error)

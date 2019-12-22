@@ -4,12 +4,15 @@ Mock.mock(
   'https://private-anon-9674dcfccd-uranus.apiary-mock.com/auth/login',
   'post',
   (option) => {
-    const { userId, password } = JSON.parse(option)
+    const { userId, password } = JSON.parse(option.body)
     if (userId === 'teststaff' && password === 'testpassword') {
       return {
         status: '200',
         message: 'success',
-        data: { token: 'tokenTest' }
+        value: {
+          token: 'tokenTest',
+          counterId: '18'
+        }
       }
     }
     return {

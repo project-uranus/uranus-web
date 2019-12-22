@@ -13,10 +13,24 @@ const columns = [
     title: '姓名',
     dataIndex: 'name',
     key: 'name'
-  }, {
+  },
+  {
     title: '身份证号',
-    dataIndex: 'id',
-    key: 'id'
+    dataIndex: 'id_number',
+    key: 'id_number'
+  },
+  {
+    title: '邮箱',
+    dataIndex: 'email',
+    key: 'email'
+  }, {
+    title: '姓',
+    dataIndex: 'last_name',
+    key: 'last_name'
+  }, {
+    title: '名',
+    dataIndex: 'first_name',
+    key: 'first_name'
   }, {
     title: '座位号',
     dataIndex: 'seat',
@@ -37,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
 const Flight = (props) => {
   console.warn(props)
   return (<Modal
+    width={800}
     title='详情'
     visible={props.visible}
     onCancel={props.onCancel}
