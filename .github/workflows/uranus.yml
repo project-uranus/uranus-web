@@ -1,5 +1,13 @@
 name: uranus
-on: [push]
+
+env:
+  TAG: v0.1
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-16.04
@@ -12,9 +20,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: yarn install and test
+      - name: yarn install and build
         run: |
           yarn install
-          yarn test
+          yarn build
         env:
-          CI: true
+          CI: false
+      - name: Login to GitHub Package Registry
+        run: docker login docker.pkg.github.com -u owner -p ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag docker.pkg.github.com/project-uranus/uranus-web/uranus-web:${TAG}
+      - name: Push the image to GitHub Package Registry
+        run: docker push docker.pkg.github.com/project-uranus/uranus-web/uranus-web:${TAG}
