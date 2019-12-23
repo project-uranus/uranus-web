@@ -36,6 +36,7 @@ const Flight = (props) => {
     formData.append('file', getFieldValue('passengerInfo').file.originFileObj)
     await importPassenger(formData)
     message.success('航班创建成功')
+    // props.history.go()
   }
 
   return (
