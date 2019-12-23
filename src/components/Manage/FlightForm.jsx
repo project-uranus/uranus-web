@@ -32,7 +32,9 @@ const Flight = (props) => {
       boarding_gate: getFieldValue('boarding_gate').toString()
     }
     await createFlight(flightData)
-    await importPassenger({ file: getFieldValue('passengerInfo').file })
+    const formData = new FormData()
+    formData.append('file', getFieldValue('passengerInfo').file.originFileObj)
+    await importPassenger(formData)
     message.success('航班创建成功')
   }
 

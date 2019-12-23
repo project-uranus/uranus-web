@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
     )
 
     const newDataSource = props.dataSource.map((item) => {
-      if (item.id_number === props.id) item.status = 'unpass'
+      if (item.luggages === props.id) item.status = 'checkFailed'
       return item
     })
 

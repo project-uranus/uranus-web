@@ -5,7 +5,8 @@ const { Option } = Select
 
 const map = {
   NGO: '名古屋中部国际机场',
-  PVG: '上海浦东国际机场'
+  PVG: '上海浦东国际机场',
+  PEK: '北京首都国际机场'
 }
 
 const AirportSelect = (props) => {

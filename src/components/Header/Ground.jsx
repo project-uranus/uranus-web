@@ -41,7 +41,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const UranusHeader = props => {
-  console.log(props)
   return (
     <Header>
       <div className={css(styles.logo)}>

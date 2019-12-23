@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: (props) => {
-    const newDataSource = props.dataSource.filter((item) => item.id_number !== props.id)
+    const newDataSource = props.dataSource.filter((item) => item.id !== props.id)
     console.log(newDataSource)
     dispatch(
       checkinList({

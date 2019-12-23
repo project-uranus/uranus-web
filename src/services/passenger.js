@@ -5,7 +5,7 @@ import { api, dataHandler } from '../utils/http'
 // import 'mock/GetLuggage'
 // import 'mock/SendSecurity'
 
-const getPassengers = (data) => api.get('/passengers', data).then(dataHandler)
+const getPassengers = (flightNum) => api.get('/passengers', { params: { flight: flightNum } }).then(dataHandler)
 
 const sendLuggage = (data) => api.post('/luggages', data).then(dataHandler)
 
