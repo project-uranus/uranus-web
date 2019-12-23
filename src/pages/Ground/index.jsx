@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const ground = props => {
+const Ground = props => {
   return (
     <Layout>
       <Layout>
@@ -36,4 +36,4 @@ const ground = props => {
   )
 }
 
-export default ground
+export default Ground

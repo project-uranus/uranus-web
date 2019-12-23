@@ -82,7 +82,8 @@ const PassengerTable = (props) => {
   ]
   useEffect(() => {
     getPassengers().then((data) => {
-      props.setPassengerList(data)
+      const [first, ...rest] = data
+      props.setPassengerList(rest)
     })
   }, [])
   return (

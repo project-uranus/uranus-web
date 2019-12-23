@@ -11,6 +11,8 @@ const HTTPErrorHandler = (error) => {
       if (error.response.status === 401) {
         message.error('令牌不存在或已过期，请重新登录！')
         history.push('/')
+      } else if (error.response.status === 409) {
+        message.warn('航班已存在!')
       } else {
         console.error(error.response)
         message.error(error.response.data.message)
@@ -37,7 +39,8 @@ const dataHandler = (response) => {
   return data.value
 }
 
-const baseURL = 'http://202.120.40.8:30379'
+const baseURL = 'http://10.0.0.116:5000'
+// const baseURL = 'http://202.120.40.8:30379'
 
 const api = axios.create({
   baseURL

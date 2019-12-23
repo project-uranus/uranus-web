@@ -49,7 +49,7 @@ const PassengerInfo = (props) => {
     seat_number: '座位号'
   }
   const { info } = props
-  const dataDescription = Object.keys(info).map(
+  const dataDescription = Object.keys(map).map(
     (key) => (
       <Descriptions.Item label={map[key]} span={3} key={key}>
         {info[key]}

@@ -26,11 +26,11 @@ const mapDispatchToProps = dispatch => ({
   pass: (id, props) => {
     sendSecurity({
       id: id,
-      passed: false,
+      passed: true,
       message: ''
     }).then(() => {
       console.log(id)
-      const newDataSource = props.dataSource.filter((item) => item.id_number !== id)
+      const newDataSource = props.dataSource.filter((item) => item.luggages !== id)
       console.log(newDataSource)
       dispatch(
         securityList({
@@ -97,8 +97,8 @@ const Home = (props) => {
       dataIndex: 'status',
       key: 'status',
       render: tag => {
-        const color = tag === 'uncheck' ? 'blue' : 'red'
-        const value = tag === 'uncheck' ? '未检查' : '检查不通过'
+        const color = tag === 'notChecked' ? 'blue' : 'red'
+        const value = tag === 'notChecked' ? '未检查' : '检查不通过'
         return (
           <Tag color={color} key={tag}>
             {value}
@@ -142,7 +142,7 @@ const Home = (props) => {
       ...props.dataSource, {
         ...JSON.parse(data.data).message.information,
         luggages: JSON.parse(data.data).message.luggages,
-        status: 'uncheck'
+        status: 'notChecked'
       }])
   })
 

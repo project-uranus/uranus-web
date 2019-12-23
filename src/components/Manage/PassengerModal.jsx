@@ -75,8 +75,13 @@ const columns = [
     dataIndex: 'status',
     key: 'status',
     render: (tag) => {
-      if (tag === 0) return <Tag color='green'>飞行中</Tag>
-      else return <Tag color='blue'>飞行结束</Tag>
+      if (tag === 'scheduled') return <Tag color='blue'>已排定</Tag>
+      else if (tag === 'delayed') return <Tag color='magenta'>已延误</Tag>
+      else if (tag === 'boarding') return <Tag color='lime'>登机中</Tag>
+      else if (tag === 'departed') return <Tag color='cyan'>已出发</Tag>
+      else if (tag === 'arrived') return <Tag color='green'>已到达</Tag>
+      else if (tag === 'cancelled') return <Tag color='red'>已取消</Tag>
+      else return <Tag color='blue'>无</Tag>
     }
   }
 ]

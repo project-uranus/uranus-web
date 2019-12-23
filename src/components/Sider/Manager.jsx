@@ -29,7 +29,7 @@ const UranusSider = props => (
     onCollapse={props.onCollapse}
   >
     <Logo collapsed={props.isCollapsed} />
-    <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+    <Menu theme='dark' mode='inline' defaultSelectedKeys={['0']}>
       <Menu.Item key='0'>
         <NavLink to='/manage/create'>
           <Icon type='edit' />

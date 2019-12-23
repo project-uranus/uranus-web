@@ -3,6 +3,8 @@ import { Layout, Menu, Typography } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
 import icon from 'static/logo.svg'
 import history from 'history.js'
+import { connect } from 'react-redux'
+import { logOut } from 'redux/actions'
 
 const { Header } = Layout
 const { Text } = Typography
@@ -26,6 +28,18 @@ const styles = StyleSheet.create({
   }
 })
 
+const mapStateToProps = state => ({
+  id: state.counter.id
+})
+
+const mapDispatchToProps = dispatch => ({
+  onClick: () => {
+    dispatch(
+      logOut()
+    )
+  }
+})
+
 const UranusHeader = props => (
   <Header>
     <div className={css(styles.logo)}>
@@ -43,9 +57,10 @@ const UranusHeader = props => (
       <Menu.Item key="1" onClick={() => {
         history.push('/')
         history.go()
+        props.onClick()
       }}>登出</Menu.Item>
     </Menu>
   </Header>
 )
 
-export default UranusHeader
+export default connect(mapStateToProps, mapDispatchToProps)(UranusHeader)

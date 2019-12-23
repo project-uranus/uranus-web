@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, Table } from 'antd'
 import { StyleSheet, css } from 'aphrodite'
 import history from 'history.js'
@@ -102,26 +102,7 @@ const Home = (props) => {
       }
     }
   ]
-  useEffect(() => {
-    // getPassengers().then((list) => {
-    //   props.setCheckinList(list)
-    // })
-    // "type": "luggage",
-    //     "message": [{
-    //         "information": {
-    //             "email": "john.doe@example.com",
-    //             "name": "John Doe",
-    //             "first_name": "John",
-    //             "last_name": "Doe",
-    //             "id_number": "00000000"
-    //         },
-    //         "spec": {
-    //             "compartment_code": "F",
-    //             "seat_number": "31A"
-    //         }
-    //     }]
 
-  }, [])
   websocket('/counter/', (data) => {
     console.log(props.dataSource)
     props.setCheckinList([

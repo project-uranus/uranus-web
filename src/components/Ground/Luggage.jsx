@@ -1,8 +1,15 @@
 import React from 'react'
 import { Form, InputNumber, Button } from 'antd'
+import { StyleSheet, css } from 'aphrodite'
 import { connect } from 'react-redux'
 import { step, luggage } from 'redux/actions'
 import { sendLuggage } from 'services/passenger'
+
+const styles = StyleSheet.create({
+  button: {
+    margin: 10
+  }
+})
 
 const mapStateToProps = state => ({
   id: state.passengerId.id
@@ -52,8 +59,11 @@ const Luggage = (props) => {
           parser={value => value.replace('kg', '')}/>)}
       </Form.Item>
       <Form.Item>
-        <Button type='primary' htmlType="submit">
+        <Button type='primary' htmlType="submit" className={css(styles.button)}>
           提交行李信息
+        </Button>
+        <Button type='info' className={css(styles.button)}>
+          跳过
         </Button>
       </Form.Item>
     </Form>
